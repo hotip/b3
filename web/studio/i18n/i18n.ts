@@ -73,7 +73,7 @@ const resources = {
       'Text Prediction': 'Text Prediction',
       'Text Similarity': 'Text Similarity',
       'Web Search': 'Web Search',
-
+      'Model Setting': 'Model Setting',
       'Continue writing': 'Continue writing',
       'Help Me Write': 'Help Me Write',
       'Spelling and Grammar': 'Spelling and Grammar',
@@ -83,6 +83,7 @@ const resources = {
       'Simplify Content': 'Simplify Content',
       'Translate': 'Translate',
       'Generate Outline': 'Generate Outline',
+      'Look up': 'Look up',
     }
   },
   zh: {
@@ -94,7 +95,7 @@ const resources = {
       'Text Prediction': '文本预测',
       'Text Similarity': '文本相似度',
       'Web Search': '网页搜索',
-
+      'Model Setting': '模型设置',
       'Continue writing': '续写',
       'Help Me Write': '帮助我写作',
       'Spelling and Grammar': '拼写和语法检查',
@@ -104,6 +105,7 @@ const resources = {
       'Simplify Content': '精简内容',
       'Translate': '翻译',
       'Generate Outline': '生成大纲',
+      'Look up': '检索',
     }
   }
 }

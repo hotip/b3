@@ -15,7 +15,7 @@ import { newAdvice } from '@/editor/extensions/advice/advice';
 import { ToolbarMenu } from "@/editor/menu/toolbar-menu";
 import { BounceLoader } from "react-spinners";
 
-export const MenuBubble = ({ editor }: {
+export const MenuBubble = ({ editor } : {
 	editor: Editor
 }) => {
 	const [loading, setLoading] = React.useState(false);
@@ -23,10 +23,9 @@ export const MenuBubble = ({ editor }: {
 
 	const [smartMenus, setSmartMenus] = React.useState<PromptAction[]>([]);
 	const [menus, setMenus] = React.useState<any[]>([]);
+	const [isShowAccept, setIsShowAccept] = React.useState(false);
 
 	useEffect(() => {
-		const { from, to, empty } = editor.state.selection;
-		const selection = editor.state.doc.textBetween(from, to, " ");
 		const innerSmartMenus: PromptAction[] = []
 
 		innerSmartMenus.push({
@@ -47,22 +46,41 @@ export const MenuBubble = ({ editor }: {
 
 		setSmartMenus(innerSmartMenus)
 		setMenus(editor?.commands?.getAiActions(FacetType.BUBBLE_MENU) || [])
+
+		setIsShowAccept(editor?.commands?.hasTrackChange() || false)
 	}, [editor, isOpen]);
 
 	const handleToggle = () => setIsOpen(!isOpen);
 
 	return <BubbleMenu className={`bubble-menu-group w-64`} editor={editor} updateDelay={800}>
+		{isShowAccept && <div className={'change-buttons'}>
+			<button
+				className='rounded-md bg-red-500 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-white/20'
+				onClick={() => {
+					editor?.commands?.acceptChange();
+				}}
+			>Accept
+			</button>
+			<button
+				className='rounded-md bg-white/10 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-white/20'
+				onClick={() => {
+					editor?.commands?.rejectChange();
+				}}
+			>Reject
+			</button>
+		</div>
+		}
 		<div className={'bubble-menu-tier1'}>
 			<div className="bubble-dropdown">
-				{loading && <BounceLoader color={"#6E56CF"} size={38}/>}
-				{!loading && <Button variant="soft" onClick={handleToggle} className={'bg-pink-500 text-white'}>
-          Ask AI
-          <CookieIcon/>
-        </Button>
+				{loading && <BounceLoader color={'#8A4FFF'} size={38} />}
+				{!loading && <Button variant="soft" onClick={handleToggle} className={'b3-color-bg-red text-white'}>
+					Ask AI
+					<CookieIcon />
+				</Button>
 				}
 			</div>
 			<div className="smart-menu">
-				<ToolbarMenu editor={editor} isBubbleMenu={true}/>
+				<ToolbarMenu editor={editor} isBubbleMenu={true} />
 			</div>
 		</div>
 		<div className={'ask-ai-dropdown'}>
@@ -72,22 +90,22 @@ export const MenuBubble = ({ editor }: {
 							<Button
 								className="dropdown-item w-full"
 								onClick={async () => {
-									setIsOpen(false)
-									setLoading(true)
+									setIsOpen(false);
+									setLoading(true);
 
 									const text = await editor.commands?.callLlm(menu);
-									setLoading(false)
+									setLoading(false);
 
-									const newComment = newAdvice(text || "")
-									editor.commands?.setAdvice(newComment.id)
-									editor.commands?.setAdviceCommand(newComment)
-									menu.action?.(editor)
-									editor.view?.focus()
+									const newComment = newAdvice(text || '');
+									editor.commands?.setAdvice(newComment.id);
+									editor.commands?.setAdviceCommand(newComment);
+									menu.action?.(editor);
+									editor.view?.focus();
 								}}
 							>
-								{menu.name} <BookmarkIcon/>
+								{menu.name} <BookmarkIcon />
 							</Button>
-						</li>
+						</li>;
 					})}
 
 					{menus?.map((menu, index) => {
@@ -98,12 +116,12 @@ export const MenuBubble = ({ editor }: {
 									event.preventDefault();
 									setIsOpen(false);
 									editor.chain().callLlm(menu);
-									editor.view?.focus()
+									editor.view?.focus();
 								}}
 							>
 								{menu.name}
 							</Button>
-						</li>
+						</li>;
 					})}
 				</ul>
 			)}
