@@ -1,6 +1,6 @@
 const nextConfig = {
   output: 'export',
-  basePath: `b3`,
+  basePath: '/b3'
 };
 
 
