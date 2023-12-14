@@ -31,7 +31,8 @@
     "lint:fix": "eslint . --ext .ts,.cjs --fix --fix-type [problem,suggestion]"
   },
   "dependencies": {
-    "openai": "^4.20.0"
+    "openai": "^4.20.0",
+    "ws": "^8.15.1"
   },
   "private": false,
   "devDependencies": {}
