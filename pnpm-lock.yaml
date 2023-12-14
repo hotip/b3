@@ -338,6 +338,9 @@ importers:
       openai:
         specifier: ^4.20.0
         version: 4.20.0
+      ws:
+        specifier: ^8.15.1
+        version: 8.15.1
 
   web/native-wrapper:
     dependencies:
@@ -18982,7 +18985,6 @@ packages:
         optional: true
       utf-8-validate:
         optional: true
-    dev: true
 
   /xml-name-validator@4.0.0:
     resolution: {integrity: sha512-ICP2e+jsHvAj2E2lIHxa5tjXRlKDJo4IdvPvCXbXQGdzSfmSpNVyIKMvoZHjDY9DP0zV17iI85o90vRFXNccRw==}
